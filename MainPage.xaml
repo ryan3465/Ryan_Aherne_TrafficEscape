@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrafficEscape2.MainPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header with Score and Lives -->
+        <Grid Grid.Row="0" BackgroundColor="#1a1a1a" Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="ScoreLabel" 
+                Text="{Binding Score, StringFormat='Score : {0}'}" 
+                TextColor="White" 
+                FontSize="20" 
+                FontAttributes="Bold"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"/>
+
+            <Button x:Name="StartButton"
+                 Grid.Column="1"
+                 Text="START"
+                 BackgroundColor="#00ff00"
+                 TextColor="Black"
+                 FontAttributes="Bold"
+                 WidthRequest="100"
+                 Clicked="OnStartClicked"/>
+
+               
+
+            <Label x:Name="LivesLabel" 
+                Grid.Column="2"
+                Text="Lives: 3" 
+                TextColor="Red" 
+                FontSize="20" 
+                FontAttributes="Bold"
+                VerticalOptions="Center"
+                HorizontalOptions="End"/>
+        </Grid>
+        <Image Source="roadpaint.png" Aspect="Fill" Grid.Row="1" ZIndex="-1" />
+        <!-- Game Canvas -->
+        <AbsoluteLayout x:Name="GameCanvas" 
+                    Grid.Row="1">
+            <!-- Gesture recognizers added in code-behind -->
+        </AbsoluteLayout>
+
+        <!-- Game Over Overlay -->
+        <Grid x:Name="GameOverOverlay" 
+           Grid.RowSpan="2"
+           BackgroundColor="#CC000000"
+           IsVisible="False">
+            <VerticalStackLayout HorizontalOptions="Center" 
+                            VerticalOptions="Center"
+                            Spacing="20">
+                <Label Text="GAME OVER" 
+                    TextColor="Red" 
+                    FontSize="48" 
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"/>
+                <Button Text="PLAY AGAIN"
+                    BackgroundColor="#00ff00"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    WidthRequest="150"
+                    Clicked="OnPlayAgainClicked"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+
+</ContentPage>
