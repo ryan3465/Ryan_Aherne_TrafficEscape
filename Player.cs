@@ -31,7 +31,7 @@ namespace TrafficEscape2
             Visual = new Image()
             {
                 Source = "car2.png",
-                WidthRequest = Size,
+                WidthRequest = Size*0.75,
                 HeightRequest = Size,
 
             };

@@ -1,4 +1,5 @@
-﻿namespace TrafficEscape2
+﻿
+namespace TrafficEscape2
 {
     public partial class MainPage : ContentPage
     {
@@ -12,11 +13,13 @@
         private int lives = 3;
         private bool isGameRunning = false;
 
-        private const int MaxBullets = 5;
+        //private const int MaxBullets = 5;
         private double canvasWidth;
         private double canvasHeight;
         private double lastPanX = 0;
         private double lastPanY = 0;
+
+        private static readonly Random rand = new Random();
 
         public int Score
         {
@@ -144,8 +147,7 @@
                              enemies[i].Size, enemies[i].Size));
 
                 // Check collision with player
-                if (CheckCollision(player.X, player.Y, player.Size,
-                                 enemies[i].X, enemies[i].Y, enemies[i].Size))
+                if (CheckCollision(player, enemies[i]))
                 {
                     GameCanvas.Children.Remove(enemies[i].Visual);
                     enemies.RemoveAt(i);
@@ -168,7 +170,7 @@
 
         private void SpawnEnemy()
         {
-            Random rand = new Random();
+           // Random rand = new Random();
             double x, y;
 
             // Spawn at random edge of screen
@@ -262,11 +264,25 @@
 
          }*/
 
-        private bool CheckCollision(double x1, double y1, double size1,
-                                   double x2, double y2, double size2)
+        private bool CheckCollision(Player p, Enemy e)
         {
-            double distance = Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
-            return distance < (size1 + size2) / 2;
+            double halfP = p.Size / 2;
+            double halfE = e.Size / 2;
+
+            double pLeft = p.X - halfP;
+            double pRight = p.X + halfP;
+            double pTop = p.Y - halfP;
+            double pBottom = p.Y + halfP;
+
+            double eLeft = e.X - halfE;
+            double eRight = e.X + halfE;
+            double eTop = e.Y - halfE;
+            double eBottom = e.Y + halfE;
+
+            return !(pRight < eLeft ||
+                     pLeft > eRight ||
+                     pBottom < eTop ||
+                     pTop > eBottom);
         }
 
         private void LoseLife()
@@ -304,6 +320,14 @@
             base.OnDisappearing();
             gameTimer?.Stop();
             enemySpawnTimer?.Stop();
+        }
+
+
+
+
+        private async void SettingsButton_ClickedAsync(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Settings());
         }
     } }
 

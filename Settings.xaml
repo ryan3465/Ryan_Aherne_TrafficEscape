@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrafficEscape2.Settings"
+             Title="Settings">
+
+    <Grid>
+        <Image Source="garage.jpg" Aspect="Fill" Grid.Row="1"  ZIndex="-1" />
+        <VerticalStackLayout Spacing="20">
+
+            <BoxView HeightRequest="100" />
+            <!-- spacer -->
+
+            <Button x:Name="Theme"
+              Text="Change Theme"
+              BackgroundColor="Yellow"
+              TextColor="Black"
+              FontAttributes="Bold"
+              WidthRequest="300"
+              Clicked="Theme_Clicked"/>
+
+            <Button x:Name="DifficultyButton"
+              Text="Normal"
+              BackgroundColor="Yellow"
+              TextColor="Black"
+              FontAttributes="Bold"
+              WidthRequest="300"
+              Clicked="DifficultyButton_Clicked"/>
+
+            <Button x:Name="BackButton"
+              Text="Back"
+              BackgroundColor="Red"
+              TextColor="Black"
+              FontAttributes="Bold"
+              WidthRequest="300"
+              Clicked="BackButton_ClickedAsync"/>   
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

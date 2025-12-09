@@ -35,11 +35,32 @@ namespace TrafficEscape2
             
            
             int whichCar = random.Next(1, 4);
+            
             String imgSrc = $"enemycar{whichCar}.jpg";
+            Size = 90;
+
+            if (whichCar == 1)
+            {
+                imgSrc = "enemycar.jpg";
+                Size = 90;
+            }
+            else if (whichCar == 2)
+            {
+                 imgSrc = $"enemycar{whichCar}.PNG";
+                Size = 100;
+            }
+
+            else
+            {
+                imgSrc = $"enemycar{whichCar}.PNG";
+                Size = 110;
+            }
+
+
             Visual = new Image()
             {
                 Source = imgSrc,
-                WidthRequest = Size,
+                WidthRequest = Size *0.75,
                 HeightRequest = Size,
             };
 
@@ -53,16 +74,9 @@ namespace TrafficEscape2
         public void Update(double screenWidth, double screenHeight)
         {
             // Move in current direction
-            X += velocityX;
+            
             Y += velocityY;
-
-            // Bounce off walls
-           // if (X < Size / 2 || X > screenWidth - Size / 2)
-           // {
-               
-              //  velocityX = -velocityX;
-             //   X = Math.Clamp(X, Size / 2, screenWidth - Size / 2);
-           // }
+            
 
             if (Y < Size / 2 )
             {
@@ -73,7 +87,7 @@ namespace TrafficEscape2
 
             if (Y > screenHeight + Size)
             {
-                isOffScreen = true;   // Add this property
+                isOffScreen = true;   
             }
 
             // Periodically change direction for more interesting movement

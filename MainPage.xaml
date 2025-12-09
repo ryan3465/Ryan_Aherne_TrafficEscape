@@ -25,6 +25,15 @@
                 VerticalOptions="Center"
                 HorizontalOptions="Start"/>
 
+            <Button x:Name="SettingsButton"
+                 Grid.Column="0"
+                 Text="Settings"
+                 BackgroundColor="blue"
+                 TextColor="Black"
+                 FontAttributes="Bold"
+                 WidthRequest="100"
+                 Clicked="SettingsButton_ClickedAsync"/>
+
             <Button x:Name="StartButton"
                  Grid.Column="1"
                  Text="START"
