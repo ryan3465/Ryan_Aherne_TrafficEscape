@@ -1,4 +1,7 @@
 ﻿
+
+
+
 namespace TrafficEscape2
 {
     public partial class MainPage : ContentPage
@@ -11,7 +14,9 @@ namespace TrafficEscape2
 
         private int score = 0;
         private double enemySpeedMultiplier = 1.0;
+        private double difficultyMultiplier = 1.0;
 
+        public string difficultyModifier { get; set; } = "normal";
         private int lives = 3;
         private bool isGameRunning = false;
 
@@ -21,7 +26,10 @@ namespace TrafficEscape2
         private double lastPanX = 0;
         private double lastPanY = 0;
 
-        private static readonly Random rand = new Random();
+        
+
+
+    private static readonly Random rand = new Random();
 
         public int Score
         {
@@ -38,6 +46,8 @@ namespace TrafficEscape2
             InitializeComponent();
             InitialiseTimersandGestures();
             BindingContext = this;
+            difficultyModifier = Preferences.Get("Difficulty", "normal");
+            ApplyDifficulty();
         }
 
         public void InitialiseTimersandGestures()
@@ -82,7 +92,7 @@ namespace TrafficEscape2
         private void StartGame()
         {
             if (isGameRunning) return;
-
+            ApplyDifficulty();
             isGameRunning = true;
             score = 0;
             lives = 3;
@@ -110,7 +120,8 @@ namespace TrafficEscape2
             if (!isGameRunning) return;
 
             // Increase difficulty every 1000 score
-            enemySpeedMultiplier = 1.0 + (Score / 1000) * 2.0;
+            double scoreMultiplier = 1.0 + (Score / 1000) * 2.0;
+            enemySpeedMultiplier = difficultyMultiplier * scoreMultiplier;
 
             // Update all bullets
             //for (int i = bullets.Count - 1; i >= 0; i--)
@@ -194,7 +205,7 @@ namespace TrafficEscape2
             AbsoluteLayout.SetLayoutBounds(enemy.Visual,
                 new Rect(enemy.X - enemy.Size / 2, enemy.Y - enemy.Size / 2, enemy.Size, enemy.Size));
 
-            TestLabel.Text = enemy.speed.ToString();
+            TestLabel.Text = difficultyMultiplier.ToString();
         }
 
         private void OnPanUpdated(object sender, PanUpdatedEventArgs e)
@@ -336,7 +347,56 @@ namespace TrafficEscape2
 
         private async void SettingsButton_ClickedAsync(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Settings());
+            if (!isGameRunning)
+            {
+                var settingsPage = new Settings();
+                settingsPage.DifficultySelected += (difficulty) =>
+                {
+                    {
+                        difficultyModifier = difficulty;
+
+                        if (difficulty == "hard")
+                            difficultyMultiplier = 5;
+                        else if (difficulty == "easy")
+                            difficultyMultiplier = 0.5;
+                        else
+                            difficultyMultiplier = 1;
+                    }
+                    ;
+                };
+                await Navigation.PushAsync(settingsPage);
+            }
+            else
+                await FlashSettingsButtonRed();
+               return; // Do NOT open settings
+
+
+            
         }
-    } }
+
+        
+            private async Task FlashSettingsButtonRed()
+        {
+            Color originalColor = SettingsButton.BackgroundColor;
+
+            for (int i = 0; i < 2; i++)
+            {
+                SettingsButton.BackgroundColor = Colors.Red;
+                await Task.Delay(150);
+                SettingsButton.BackgroundColor = originalColor;
+                await Task.Delay(150);
+            }
+        }
+
+        private void ApplyDifficulty()
+        {
+            if (difficultyModifier == "hard")
+                difficultyMultiplier = 5;
+            else if (difficultyModifier == "easy")
+                difficultyMultiplier = 0.5;
+            else
+                difficultyMultiplier = 1;
+        }
+    }
+    } 
 

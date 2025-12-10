@@ -89,6 +89,13 @@
                     FontAttributes="Bold"
                     WidthRequest="150"
                     Clicked="OnPlayAgainClicked"/>
+                <Button x:Name="SettingsButton2"
+                     Text="Settings"
+                     BackgroundColor="Blue"
+                     TextColor="Black"
+                     FontAttributes="Bold"
+                     WidthRequest="150"
+                     Clicked="SettingsButton_ClickedAsync"/>
             </VerticalStackLayout>
         </Grid>
     </Grid>
