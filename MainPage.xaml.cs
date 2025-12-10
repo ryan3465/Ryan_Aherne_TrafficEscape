@@ -10,6 +10,8 @@ namespace TrafficEscape2
         private IDispatcherTimer enemySpawnTimer;
 
         private int score = 0;
+        private double enemySpeedMultiplier = 1.0;
+
         private int lives = 3;
         private bool isGameRunning = false;
 
@@ -107,6 +109,9 @@ namespace TrafficEscape2
         {
             if (!isGameRunning) return;
 
+            // Increase difficulty every 1000 score
+            enemySpeedMultiplier = 1.0 + (Score / 1000) * 2.0;
+
             // Update all bullets
             //for (int i = bullets.Count - 1; i >= 0; i--)
             // {
@@ -136,6 +141,7 @@ namespace TrafficEscape2
                     GameCanvas.Children.Remove(enemies[i].Visual);
                     enemies.RemoveAt(i);
                     Score += 100;   // Optional: reward score
+                    ScoreLabel.Text = score.ToString();
                     continue;
                 }
 
@@ -155,7 +161,7 @@ namespace TrafficEscape2
                     continue;
                 }
 
-                ScoreLabel.Text = Score.ToString();
+                
 
 
 
@@ -182,10 +188,13 @@ namespace TrafficEscape2
 
             Enemy enemy;
             enemy = new Enemy(x, y);
+            enemy.speed *= enemySpeedMultiplier;
             enemies.Add(enemy);
             GameCanvas.Children.Add(enemy.Visual);
             AbsoluteLayout.SetLayoutBounds(enemy.Visual,
                 new Rect(enemy.X - enemy.Size / 2, enemy.Y - enemy.Size / 2, enemy.Size, enemy.Size));
+
+            TestLabel.Text = enemy.speed.ToString();
         }
 
         private void OnPanUpdated(object sender, PanUpdatedEventArgs e)

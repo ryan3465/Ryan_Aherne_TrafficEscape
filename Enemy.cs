@@ -21,7 +21,7 @@ namespace TrafficEscape2
       
         private double velocityX;
         private double velocityY;
-        private double speed = 6.0;
+        public double speed = 6.0;
         private Random random = new Random();
         private DateTime lastDirectionChange;
         private int directionChangeInterval = 2000; // Change direction every 2 seconds

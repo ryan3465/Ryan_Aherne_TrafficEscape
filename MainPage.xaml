@@ -53,6 +53,15 @@
                 FontAttributes="Bold"
                 VerticalOptions="Center"
                 HorizontalOptions="End"/>
+
+            <Label x:Name="TestLabel" 
+                Grid.Column="3"
+                Text="" 
+                TextColor="Yellow" 
+                FontSize="20" 
+                FontAttributes="Bold"
+                VerticalOptions="Center"
+                HorizontalOptions="End"/>   
         </Grid>
         <Image Source="roadpaint.png" Aspect="Fill" Grid.Row="1" ZIndex="-1" />
         <!-- Game Canvas -->
