@@ -12,7 +12,7 @@ namespace TrafficEscape2
         public double X { get; private set; }
         public double Y { get; private set; }
         public double Size { get; private set; } = 90;
-        // public BoxView Visual { get; private set; }
+        
 
         public Image Visual { get; private set; }
 
@@ -23,8 +23,7 @@ namespace TrafficEscape2
         private double velocityY;
         public double speed = 6.0;
         private Random random = new Random();
-        private DateTime lastDirectionChange;
-        private int directionChangeInterval = 2000; // Change direction every 2 seconds
+        
 
         // Creates a new enemy at the specified position.
         // The enemy will have a random initial direction.
@@ -90,29 +89,8 @@ namespace TrafficEscape2
                 isOffScreen = true;   
             }
 
-            // Periodically change direction for more interesting movement
-            // if ((DateTime.Now - lastDirectionChange).TotalMilliseconds > directionChangeInterval)
-            // {
-            //    ChangeDirection();
-            //    lastDirectionChange = DateTime.Now;
-            //   }
         }
 
-        // Changes the enemy's direction to a new random direction.
-       // private void ChangeDirection()
-       // {
-            // Generate random angle
-         //   double angle = random.NextDouble() * 2 * Math.PI;
-
-            // Convert to velocity components
-         //   velocityX = Math.Cos(angle) * speed;
-         //   velocityY = Math.Sin(angle) * speed;
-       // }
-
-
-        // Alternative update method: Makes the enemy move towards a target (like the player).
-        // Maybe different types of enemies could use this behaviour.
-        // This is not currently used but demonstrates how to create homing enemies.
         public void MoveTowards(double targetX, double targetY)
         {
             double dx = targetX - X;

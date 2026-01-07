@@ -11,26 +11,47 @@
             <BoxView HeightRequest="100" />
             <!-- spacer -->
 
+            <Label Text="High Score" 
+    TextColor="{AppThemeBinding Light=red, Dark=White}"
+    
+    FontAttributes="Bold"
+    HorizontalOptions="Center"/>
+
+            <Label Text="" 
+                   x:Name="HighScoreLabel"
+    TextColor="{AppThemeBinding Light=red, Dark=White}"
+                   
+     
+    FontAttributes="Bold"
+    HorizontalOptions="Center"/>
+
             <Button x:Name="Theme"
-              Text="Change Theme"
-              BackgroundColor="Yellow"
-              TextColor="Black"
+              Text="Dark Mode"
+                               TextColor="{AppThemeBinding Light=Black, Dark=White}"
+BackgroundColor="{AppThemeBinding Light=Yellow, Dark=Black}"
               FontAttributes="Bold"
               WidthRequest="300"
               Clicked="Theme_Clicked"/>
 
             <Button x:Name="DifficultyButton"
               Text="Normal"
-              BackgroundColor="Yellow"
-              TextColor="Black"
+                               TextColor="{AppThemeBinding Light=Black, Dark=White}"
+BackgroundColor="{AppThemeBinding Light=yellow, Dark=Black}"
               FontAttributes="Bold"
               WidthRequest="300"
               Clicked="DifficultyButton_Clicked"/>
 
+            <Button x:Name="ClearHighScoreButton" Text="Clear High Score"                              
+                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
+BackgroundColor="{AppThemeBinding Light=Yellow, Dark=Black}"
+                    FontAttributes="Bold"
+WidthRequest="300"
+                    Clicked="ClearHighScoreButton_Clicked"/>
+
             <Button x:Name="BackButton"
               Text="Back"
-              BackgroundColor="Red"
-              TextColor="Black"
+                               TextColor="{AppThemeBinding Light=Black, Dark=White}"
+BackgroundColor="{AppThemeBinding Light=red, Dark=Black}"
               FontAttributes="Bold"
               WidthRequest="300"
               Clicked="BackButton_ClickedAsync"/>   

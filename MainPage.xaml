@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TrafficEscape2.MainPage">
+    
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,7 +20,9 @@
 
             <Label x:Name="ScoreLabel" 
                 Text="{Binding Score, StringFormat='Score : {0}'}" 
-                TextColor="White" 
+                   TextColor="{AppThemeBinding Light=red, Dark=White}"
+
+                
                 FontSize="20" 
                 FontAttributes="Bold"
                 VerticalOptions="Center"
@@ -28,8 +31,8 @@
             <Button x:Name="SettingsButton"
                  Grid.Column="0"
                  Text="Settings"
-                 BackgroundColor="blue"
-                 TextColor="Black"
+                 TextColor="{AppThemeBinding Light=Black, Dark=White}"
+BackgroundColor="{AppThemeBinding Light=Blue, Dark=Black}"
                  FontAttributes="Bold"
                  WidthRequest="100"
                  Clicked="SettingsButton_ClickedAsync"/>
@@ -37,8 +40,8 @@
             <Button x:Name="StartButton"
                  Grid.Column="1"
                  Text="START"
-                 BackgroundColor="#00ff00"
-                 TextColor="Black"
+                 TextColor="{AppThemeBinding Light=black, Dark=White}"
+BackgroundColor="{AppThemeBinding Light=#00ff00, Dark=Black}"
                  FontAttributes="Bold"
                  WidthRequest="100"
                  Clicked="OnStartClicked"/>
@@ -48,25 +51,29 @@
             <Label x:Name="LivesLabel" 
                 Grid.Column="2"
                 Text="Lives: 3" 
-                TextColor="Red" 
+                TextColor="{AppThemeBinding Light=red, Dark=White}"
+
                 FontSize="20" 
                 FontAttributes="Bold"
                 VerticalOptions="Center"
                 HorizontalOptions="End"/>
 
-            <Label x:Name="TestLabel" 
-                Grid.Column="3"
-                Text="" 
-                TextColor="Yellow" 
-                FontSize="20" 
-                FontAttributes="Bold"
-                VerticalOptions="Center"
-                HorizontalOptions="End"/>   
+            
         </Grid>
         <Image Source="roadpaint.png" Aspect="Fill" Grid.Row="1" ZIndex="-1" />
         <!-- Game Canvas -->
+        
         <AbsoluteLayout x:Name="GameCanvas" 
                     Grid.Row="1">
+            <Label
+            x:Name="CountdownLabel"
+            Text=""
+            FontSize="72"
+            TextColor="White"
+            FontAttributes="Bold"
+            IsVisible="False"
+            AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+            AbsoluteLayout.LayoutFlags="PositionProportional" />
             <!-- Gesture recognizers added in code-behind -->
         </AbsoluteLayout>
 
@@ -79,20 +86,20 @@
                             VerticalOptions="Center"
                             Spacing="20">
                 <Label Text="GAME OVER" 
-                    TextColor="Red" 
+                    TextColor="{AppThemeBinding Light=red, Dark=White}"
                     FontSize="48" 
                     FontAttributes="Bold"
                     HorizontalOptions="Center"/>
                 <Button Text="PLAY AGAIN"
-                    BackgroundColor="#00ff00"
-                    TextColor="Black"
+                                                   TextColor="{AppThemeBinding Light=Black, Dark=White}"
+BackgroundColor="{AppThemeBinding Light=#00ff00, Dark=Black}"
                     FontAttributes="Bold"
                     WidthRequest="150"
                     Clicked="OnPlayAgainClicked"/>
                 <Button x:Name="SettingsButton2"
                      Text="Settings"
-                     BackgroundColor="Blue"
-                     TextColor="Black"
+                                                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
+BackgroundColor="{AppThemeBinding Light=blue, Dark=Black}"
                      FontAttributes="Bold"
                      WidthRequest="150"
                      Clicked="SettingsButton_ClickedAsync"/>
